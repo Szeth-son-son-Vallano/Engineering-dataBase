@@ -27,11 +27,10 @@ ON DUPLICATE KEY UPDATE `nombre` = VALUES(`nombre`);
 CREATE TABLE IF NOT EXISTS `estudiantes` (
     `id_estudiante` INT AUTO_INCREMENT PRIMARY KEY,
     `nombre` VARCHAR(50) NOT NULL,
-    `apellido` VARCHAR(50) NOT NULL,
+    `edad` INT NOT NULL,
     `semestre` TINYINT NOT NULL,                      -- 1, 3, 5, etc.
     `id_carrera` INT NOT NULL,                        -- Llave foránea hacia carreras
     `foto` VARCHAR(255) DEFAULT 'default.png',        -- Ruta, archivo o URL de la foto (o LONGBLOB si es binario)
-    `creado_en` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT `fk_estudiante_carrera` 
         FOREIGN KEY (`id_carrera`) REFERENCES `carreras`(`id_carrera`)
         ON DELETE RESTRICT 
@@ -48,8 +47,7 @@ CREATE OR REPLACE VIEW `vista_estudiantes` AS
 SELECT 
     e.`id_estudiante`,
     e.`nombre`,
-    e.`apellido`,
-    CONCAT(e.`nombre`, ' ', e.`apellido`) AS `nombre_completo`,
+    e.`edad`,
     e.`semestre`,
     c.`nombre` AS `carrera`,
     e.`foto`,

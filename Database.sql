@@ -44,15 +44,15 @@ SELECT `nombre`, `edad`,1, `fotografía`, 1
 FROM `base_1Mec`.`alumnosM1`;
 
 INSERT INTO `ingenierias`.`estudiantes` (`nombre`, `edad`,`semestre`, `foto`,`id_carrera`)
-SELECT `nombre`, `edad`,1, `fotografía`, 1
+SELECT `nombre`, `edad`,3, `fotografía`, 1
 FROM `meca3ro`.`usuarios`;
 
 INSERT INTO `ingenierias`.`estudiantes` (`nombre`, `edad`,`semestre`, `foto`,`id_carrera`)
-SELECT `nombre`, `edad`,1, `fotografía`, 1
+SELECT `nombre`, `edad`,5, `fotografía`, 1
 FROM `base_5Mec`.`alumnos`;
 
 INSERT INTO `ingenierias`.`estudiantes` (`nombre`, `edad`,`semestre`, `foto`,`id_carrera`)
-SELECT `nombre`, `edad`,1, `fotografía`, 1
+SELECT `nombre`, `edad`,2, `fotografía`, 5
 FROM `base_5Minas`.`minas5to`;
 
 -- -------------------------------------------------------

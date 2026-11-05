@@ -55,6 +55,11 @@ INSERT INTO `ingenierias`.`estudiantes` (`nombre`, `edad`,`semestre`, `foto`,`id
 SELECT `nombre`, `edad`,2, `fotografía`, 5
 FROM `base_5Minas`.`minas5to`;
 
+
+INSERT INTO `ingenierias`.`estudiantes` (`nombre`, `edad`,`semestre`, `foto`,`id_carrera`)
+SELECT `nombre`, `edad`,2, `fotografía`, 3
+FROM `base_3Minas`.`minas5to`;
+
 -- -------------------------------------------------------
 -- 3. Vista: Consulta simplificada para ver a los estudiantes
 -- Permite ver directamente nombre, semestre, carrera y foto

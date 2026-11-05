@@ -19,11 +19,6 @@ INSERT INTO `carreras` (`nombre`) VALUES
 ('Mecatrónica'),
 ('Minas')
 ON DUPLICATE KEY UPDATE `nombre` = VALUES(`nombre`);
-
-INSERT INTO `ingenierias`.`estudiantes` (`nombre`, `edad`,`semestre`, `foto`,`id_carrera`)
-SELECT `nombre`, `edad`,1, `fotografía`, 1
-FROM `base_1Mec`.`alumnosM1`;
-
 -- -------------------------------------------------------
 -- 2. Tabla: Estudiantes (Students)
 -- Nota: En SQL las tablas se definen con paréntesis ()
@@ -42,6 +37,21 @@ CREATE TABLE IF NOT EXISTS `estudiantes` (
     CONSTRAINT `chk_semestre` 
         CHECK (`semestre` BETWEEN 1 AND 12)
 );
+
+
+INSERT INTO `ingenierias`.`estudiantes` (`nombre`, `edad`,`semestre`, `foto`,`id_carrera`)
+SELECT `nombre`, `edad`,1, `fotografía`, 1
+FROM `base_1Mec`.`alumnosM1`;
+
+
+INSERT INTO `ingenierias`.`estudiantes` (`nombre`, `edad`,`semestre`, `foto`,`id_carrera`)
+SELECT `nombre`, `edad`,1, `fotografía`, 1
+FROM `meca3ro`.`usuarios`;
+
+
+INSERT INTO `ingenierias`.`estudiantes` (`nombre`, `edad`,`semestre`, `foto`,`id_carrera`)
+SELECT `nombre`, `edad`,1, `fotografía`, 1
+FROM `base_5Mec`.`alumnos`;
 
 -- -------------------------------------------------------
 -- 3. Vista: Consulta simplificada para ver a los estudiantes

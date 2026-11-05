@@ -1,0 +1,59 @@
+-- =======================================================
+-- Base de Datos: ingenierías
+-- Sistema de gestión de estudiantes por carrera y semestre
+-- =======================================================
+
+CREATE DATABASE IF NOT EXISTS `ingenierias`;
+USE `ingenierias`;
+
+-- -------------------------------------------------------
+-- 1. Tabla: Carreras (Majors)
+-- -------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `carreras` (
+    `id_carrera` INT AUTO_INCREMENT PRIMARY KEY,
+    `nombre` VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Insertamos las carreras requeridas (Mecatrónica y Minas)
+INSERT INTO `carreras` (`nombre`) VALUES 
+('Mecatrónica'),
+('Minas')
+ON DUPLICATE KEY UPDATE `nombre` = VALUES(`nombre`);
+
+-- -------------------------------------------------------
+-- 2. Tabla: Estudiantes (Students)
+-- Nota: En SQL las tablas se definen con paréntesis ()
+-- -------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `estudiantes` (
+    `id_estudiante` INT AUTO_INCREMENT PRIMARY KEY,
+    `nombre` VARCHAR(50) NOT NULL,
+    `apellido` VARCHAR(50) NOT NULL,
+    `semestre` TINYINT NOT NULL,                      -- 1, 3, 5, etc.
+    `id_carrera` INT NOT NULL,                        -- Llave foránea hacia carreras
+    `foto` VARCHAR(255) DEFAULT 'default.png',        -- Ruta, archivo o URL de la foto (o LONGBLOB si es binario)
+    `creado_en` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT `fk_estudiante_carrera` 
+        FOREIGN KEY (`id_carrera`) REFERENCES `carreras`(`id_carrera`)
+        ON DELETE RESTRICT 
+        ON UPDATE CASCADE,
+    CONSTRAINT `chk_semestre` 
+        CHECK (`semestre` BETWEEN 1 AND 12)
+);
+
+-- -------------------------------------------------------
+-- 3. Vista: Consulta simplificada para ver a los estudiantes
+-- Permite ver directamente nombre, semestre, carrera y foto
+-- -------------------------------------------------------
+CREATE OR REPLACE VIEW `vista_estudiantes` AS
+SELECT 
+    e.`id_estudiante`,
+    e.`nombre`,
+    e.`apellido`,
+    CONCAT(e.`nombre`, ' ', e.`apellido`) AS `nombre_completo`,
+    e.`semestre`,
+    c.`nombre` AS `carrera`,
+    e.`foto`,
+    CONCAT(e.`semestre`, '° ', c.`nombre`) AS `grupo`
+FROM `estudiantes` e
+INNER JOIN `carreras` c ON e.`id_carrera` = c.`id_carrera`;
+

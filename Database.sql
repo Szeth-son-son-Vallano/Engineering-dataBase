@@ -20,6 +20,10 @@ INSERT INTO `carreras` (`nombre`) VALUES
 ('Minas')
 ON DUPLICATE KEY UPDATE `nombre` = VALUES(`nombre`);
 
+INSERT INTO `ingenierias`.`estudiantes` (`nombre`, `edad`,`semestre`, `foto`,`id_carrera`)
+SELECT `nombre`, `edad`,1, `fotografía`, 1
+FROM `base_1Mec`.`alumnosM1`;
+
 -- -------------------------------------------------------
 -- 2. Tabla: Estudiantes (Students)
 -- Nota: En SQL las tablas se definen con paréntesis ()
